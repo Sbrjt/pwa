@@ -11,6 +11,7 @@
 
 <body>
     Hi
+    <button id='btn'>Install</button>
 
     <script>
         window.addEventListener('load', async () => {
@@ -18,7 +19,22 @@
                 .serviceWorker
                 .register('serviceworker.js')
         })
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+        });
+
+        btn.addEventListener('click', async () => {
+            if (deferredPrompt !== null) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    deferredPrompt = null;
+                }
+            }
+        });
     </script>
+
+
 </body>
 
 </html>
