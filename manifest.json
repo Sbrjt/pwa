@@ -1,0 +1,30 @@
+{
+	"name": "Josaa Cutoffs",
+	"short_name": "Josaa Cutoffs",
+	"description": "2023 JoSAA Cutoffs: Round 6 Opening and Closing Rank",
+	"start_url": "/index.html",
+	"id": "index.html",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"orientation": "natural",
+	"icons": [
+		{
+			"src": "./images/icons/android-chrome-192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "./images/screenshots/screenshot1.png",
+			"sizes": "1080x1920",
+			"type": "image/png"
+		},
+		{
+			"src": "./images/screenshots/screenshot3.png",
+			"sizes": "1920x1080",
+			"type": "image/png",
+			"form_factor": "wide"
+		}
+	]
+}
