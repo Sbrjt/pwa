@@ -1,9 +1,8 @@
 {
-	"name": "Josaa Cutoffs",
-	"short_name": "Josaa Cutoffs",
-	"description": "2023 JoSAA Cutoffs: Round 6 Opening and Closing Rank",
-	"start_url": "/index.html",
-	"id": "index.html",
+	"name": "My App",
+	"short_name": "My App",
+	"description": "My App",
+	"start_url": "/pwa",
 	"display": "standalone",
 	"background_color": "#ffffff",
 	"orientation": "natural",
