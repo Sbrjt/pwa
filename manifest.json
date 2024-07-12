@@ -34,7 +34,7 @@
 			"form_factor": "wide"
 		}
 	],
-	"categories": "education",
+	"categories": ["education"],
 	"url_handlers": [{ "origin": "https://sbrjt.github.io/pwa/*" }],
 	"handle_links": "preferred"
 }
