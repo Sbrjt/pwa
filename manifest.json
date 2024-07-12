@@ -1,9 +1,10 @@
 {
 	"name": "My App",
-	"short_name": "My App",
-	"description": "My App",
-	"start_url": "/pwa/",
+	"short_name": "App",
+	"description": "blah blah",
 	"scope": "/pwa/",
+	"start_url": "/pwa/",
+	"id": "/pwa/",
 	"display": "standalone",
 	"background_color": "#ffffff",
 	"theme_color": "#000000",
@@ -13,6 +14,11 @@
 			"src": "./images/icons/android-chrome-192x192.png",
 			"type": "image/png",
 			"sizes": "192x192"
+		},
+		{
+			"src": "./images/icons/android-chrome-512x512.png",
+			"type": "image/png",
+			"sizes": "512x512"
 		}
 	],
 	"screenshots": [
@@ -27,5 +33,8 @@
 			"type": "image/png",
 			"form_factor": "wide"
 		}
-	]
+	],
+	"categories": "education",
+	"url_handlers": [{ "origin": "https://sbrjt.github.io/pwa/*" }],
+	"handle_links": "preferred"
 }
