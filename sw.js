@@ -32,7 +32,7 @@ registerRoute(
 		request.destination === 'style' ||
 		request.destination === 'manifest' ||
 		request.destination === 'worker',
-	new CacheFirst({
+	new StaleWhileRevalidate({
 		cacheName: 'static-assets',
 		plugins: [
 			new CacheableResponsePlugin({
