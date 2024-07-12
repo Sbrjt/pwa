@@ -3,7 +3,7 @@
 	"short_name": "My App",
 	"description": "My App",
 	"start_url": "/pwa",
-	"scope": "/pwa/",
+	"scope": "/pwa_",
 	"display": "standalone",
 	"background_color": "#ffffff",
 	"theme_color": "#000000",
