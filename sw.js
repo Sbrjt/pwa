@@ -10,7 +10,7 @@ const {
 	precaching: { matchPrecache, precacheAndRoute }
 } = workbox
 
-precacheAndRoute([{ url: '/404.html', revision: null }])
+precacheAndRoute([{ url: 'pwa/404.html', revision: null }])
 
 // Cache page navigations (html) with a Network First strategy
 registerRoute(
@@ -50,7 +50,7 @@ registerRoute(
 setCatchHandler(async ({ event }) => {
 	// Return the precached offline page if a document is being requested
 	if (event.request.destination === 'document') {
-		return matchPrecache('/404.html')
+		return matchPrecache('pwa/404.html')
 	}
 
 	return Response.error()
