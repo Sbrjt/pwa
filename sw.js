@@ -1,25 +1,57 @@
-self.addEventListener('install', (e) => {
-	e.waitUntil(
-		caches.open('pwa').then((cache) => {
-			return cache.addAll([
-				'/',
-				'/index.html',
-				'/404.html',
-				'/manifest.json',
-				'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-				'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'
-			])
-		})
-	)
-})
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.2.0/workbox-sw.js')
 
-self.addEventListener('fetch', (e) => {
-	// if user is offline send response from the cache
-	// if resource is not found, return 404.html
+workbox.setConfig({ debug: true })
 
-	if (!navigator.onLine) {
-		e.respondWith(caches.match(e.request).then((res) => res || caches.match('/404.html')))
+const {
+	routing: { registerRoute, setCatchHandler },
+	strategies: { CacheFirst, NetworkFirst, StaleWhileRevalidate },
+	cacheableResponse: { CacheableResponse, CacheableResponsePlugin },
+	expiration: { ExpirationPlugin, CacheExpiration },
+	precaching: { matchPrecache, precacheAndRoute }
+} = workbox
+
+precacheAndRoute([{ url: '/404.html', revision: null }])
+
+// Cache page navigations (html) with a Network First strategy
+registerRoute(
+	({ request, url }) => request.mode === 'navigate',
+	new StaleWhileRevalidate({
+		cacheName: 'pages',
+		plugins: [
+			new CacheableResponsePlugin({
+				statuses: [200]
+			})
+		]
+	})
+)
+
+// Cache CSS, JS, Manifest, and Web Worker
+registerRoute(
+	({ request }) =>
+		request.destination === 'script' ||
+		request.destination === 'style' ||
+		request.destination === 'manifest' ||
+		request.destination === 'worker',
+	new CacheFirst({
+		cacheName: 'static-assets',
+		plugins: [
+			new CacheableResponsePlugin({
+				statuses: [0, 200]
+			}),
+			new ExpirationPlugin({
+				maxEntries: 32,
+				maxAgeSeconds: 24 * 60 * 60 // 24 hours
+			})
+		]
+	})
+)
+
+// Catch routing errors, like if the user is offline
+setCatchHandler(async ({ event }) => {
+	// Return the precached offline page if a document is being requested
+	if (event.request.destination === 'document') {
+		return matchPrecache('/404.html')
 	}
-})
 
-//
+	return Response.error()
+})
